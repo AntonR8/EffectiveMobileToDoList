@@ -8,17 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		1231A3882C81E9E400304A16 /* EffectiveMobileToDoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3872C81E9E400304A16 /* EffectiveMobileToDoListApp.swift */; };
-		1231A38A2C81E9E400304A16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3892C81E9E400304A16 /* ContentView.swift */; };
+		1231A38A2C81E9E400304A16 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3892C81E9E400304A16 /* MainView.swift */; };
 		1231A38C2C81E9E500304A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1231A38B2C81E9E500304A16 /* Assets.xcassets */; };
 		1231A38F2C81E9E500304A16 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1231A38E2C81E9E500304A16 /* Preview Assets.xcassets */; };
+		1231A3972C81EACC00304A16 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3962C81EACC00304A16 /* ListView.swift */; };
+		1231A3992C81EAFC00304A16 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3982C81EAFC00304A16 /* AboutView.swift */; };
+		1231A39B2C81EC4900304A16 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A39A2C81EC4900304A16 /* LaunchScreenView.swift */; };
+		1231A39F2C81EFDE00304A16 /* ListElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A39E2C81EFDE00304A16 /* ListElementView.swift */; };
+		1231A3A22C81F05A00304A16 /* ToDoListData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3A02C81F05A00304A16 /* ToDoListData.xcdatamodeld */; };
+		1231A3A42C81F0D500304A16 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3A32C81F0D500304A16 /* ViewModel.swift */; };
+		1231A3A62C8201B400304A16 /* ListItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3A52C8201B400304A16 /* ListItemModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1231A3842C81E9E400304A16 /* EffectiveMobileToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EffectiveMobileToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1231A3872C81E9E400304A16 /* EffectiveMobileToDoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectiveMobileToDoListApp.swift; sourceTree = "<group>"; };
-		1231A3892C81E9E400304A16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1231A3892C81E9E400304A16 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1231A38B2C81E9E500304A16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1231A38E2C81E9E500304A16 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1231A3962C81EACC00304A16 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		1231A3982C81EAFC00304A16 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		1231A39A2C81EC4900304A16 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		1231A39E2C81EFDE00304A16 /* ListElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListElementView.swift; sourceTree = "<group>"; };
+		1231A3A12C81F05A00304A16 /* ToDoListData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoListData.xcdatamodel; sourceTree = "<group>"; };
+		1231A3A32C81F0D500304A16 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		1231A3A52C8201B400304A16 /* ListItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +66,10 @@
 			isa = PBXGroup;
 			children = (
 				1231A3872C81E9E400304A16 /* EffectiveMobileToDoListApp.swift */,
-				1231A3892C81E9E400304A16 /* ContentView.swift */,
+				1231A3A52C8201B400304A16 /* ListItemModel.swift */,
+				1231A3A32C81F0D500304A16 /* ViewModel.swift */,
+				1231A3952C81EAB500304A16 /* Views */,
+				1231A3A02C81F05A00304A16 /* ToDoListData.xcdatamodeld */,
 				1231A38B2C81E9E500304A16 /* Assets.xcassets */,
 				1231A38D2C81E9E500304A16 /* Preview Content */,
 			);
@@ -65,6 +82,34 @@
 				1231A38E2C81E9E500304A16 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1231A3952C81EAB500304A16 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1231A39C2C81EC5200304A16 /* Main */,
+				1231A39D2C81EFBB00304A16 /* ListView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1231A39C2C81EC5200304A16 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1231A39A2C81EC4900304A16 /* LaunchScreenView.swift */,
+				1231A3982C81EAFC00304A16 /* AboutView.swift */,
+				1231A3892C81E9E400304A16 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		1231A39D2C81EFBB00304A16 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				1231A3962C81EACC00304A16 /* ListView.swift */,
+				1231A39E2C81EFDE00304A16 /* ListElementView.swift */,
+			);
+			path = ListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +182,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1231A38A2C81E9E400304A16 /* ContentView.swift in Sources */,
+				1231A39B2C81EC4900304A16 /* LaunchScreenView.swift in Sources */,
+				1231A3992C81EAFC00304A16 /* AboutView.swift in Sources */,
+				1231A38A2C81E9E400304A16 /* MainView.swift in Sources */,
 				1231A3882C81E9E400304A16 /* EffectiveMobileToDoListApp.swift in Sources */,
+				1231A3A62C8201B400304A16 /* ListItemModel.swift in Sources */,
+				1231A3972C81EACC00304A16 /* ListView.swift in Sources */,
+				1231A39F2C81EFDE00304A16 /* ListElementView.swift in Sources */,
+				1231A3A42C81F0D500304A16 /* ViewModel.swift in Sources */,
+				1231A3A22C81F05A00304A16 /* ToDoListData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +332,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,6 +362,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -344,6 +398,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1231A3A02C81F05A00304A16 /* ToDoListData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1231A3A12C81F05A00304A16 /* ToDoListData.xcdatamodel */,
+			);
+			currentVersion = 1231A3A12C81F05A00304A16 /* ToDoListData.xcdatamodel */;
+			path = ToDoListData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1231A37C2C81E9E400304A16 /* Project object */;
 }
