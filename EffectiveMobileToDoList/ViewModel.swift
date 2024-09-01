@@ -5,34 +5,31 @@
 //  Created by Антон Разгуляев on 30.08.2024.
 //
 
-import Foundation
+import SwiftUI
 import CoreData
 
 class ViewModel: ObservableObject {
-   @Published var toDoList: [ToDoListEntity] = []
+    @Published var createNewEntry = false
+    @Published var navigationPath = NavigationPath()
+    @AppStorage("firstLaunch") var firstLaunch = true
+    @Published var toDoList: [ToDoListEntity] = []
     let container: NSPersistentContainer
 
     init() {
-
-
-        container = NSPersistentContainer (name: "ToDoListData")
+        container = NSPersistentContainer(name: "ToDoListData")
         container.loadPersistentStores { _, error in
             if let error = error {
                 print ("Ошибка загрузки данных: \(error)")
-            } else {
-                print ("Даннные успешно загружены")
             }
         }
-
-        let newItem = ToDoListEntity(context: container.viewContext)
-        newItem.id = Int64(UUID().hashValue)
-        newItem.userID = 1
-        newItem.todo = "Новая задача"
-        newItem.completed = false
-        fetchHelloData()
+        fetchData()
+        if firstLaunch {
+            saveDownLoadedData()
+        }
+        firstLaunch = false
     }
 
-    func fetchHelloData() {
+    func fetchData() {
         let request = NSFetchRequest<ToDoListEntity>(entityName: "ToDoListEntity")
         do {
             toDoList = try container.viewContext.fetch(request)
@@ -40,33 +37,55 @@ class ViewModel: ObservableObject {
             print ("Ошибка извлечения данных: \(error)")
         }
     }
-
-    func newItem(/*id: Int64, userID: Int64, todo: String, completed: Bool*/) {
-        // создаём экземпляр данных:
-        let newItem = ToDoListEntity(context: container.viewContext)
-        newItem.id = Int64(UUID().hashValue)
-        newItem.userID = 1
-        newItem.todo = "Новая задача2"
-        newItem.completed = false
-
-
-        // сохраняем экземпляр данных:
+    
+    func saveContainer() {
         do {
             try container.viewContext.save()
         } catch let error {
             print ("Ошибка сохранения данных: \(error)")
         }
+    }
 
-        // извлекаем данные из контейнера
-        fetchHelloData()
+    func createNewEntry(id: Int64 = Int64(UUID().hashValue), userID: Int64 = 1, todo: String = "Новая задача2", completed: Bool = false, date: Date = Date()) {
+        // создаём экземпляр данных:
+        let newItem = ToDoListEntity(context: container.viewContext)
+        newItem.id = id
+        newItem.userID = userID
+        newItem.todo = todo
+        newItem.completed = completed
+        newItem.dateMade = date
+      
+        saveContainer()
+        fetchData()
     }
     
+    func resaveEntry(entry: ToDoListEntity, todo: String) {
+                container.viewContext.delete(entry)
+                createNewEntry(
+                    id: entry.id,
+                    userID: entry.userID,
+                    todo: todo,
+                    completed: entry.completed,
+                    date: entry.dateMade ?? Date()
+                    ) 
+    }
+
+                   
     func deleteItem(atOffsets: IndexSet) {
-        toDoList.remove(atOffsets: atOffsets)
+        for entry in toDoList {
+            if let index = atOffsets.first {
+                if toDoList[index].id == entry.id {
+                    container.viewContext.delete(entry)
+                }
+            }
+        }
+        saveContainer()
+        fetchData()
     }
     
     func moveItems(fromOffsets: IndexSet, toOffset: Int) {
         toDoList.move(fromOffsets: fromOffsets, toOffset: toOffset)
+        saveContainer()
     }
 
     func downLoadJSONData(url: URL, completionHandler: @escaping(Data) -> ()) {
@@ -84,37 +103,44 @@ class ViewModel: ObservableObject {
         }.resume()
     }
 
-
-    func resetTheList(link: String) {
-        guard let url = URL(string: link) else {
+    
+    func deleteAllData() {
+        toDoList.removeAll()
+        saveContainer()
+    }
+    
+    
+    func saveDownLoadedData() {
+        guard let url = URL(string: "https://dummyjson.com/todos") else {
             print("Переданная ссылка не корректна")
             return
         }
         downLoadJSONData(url: url) { data in
             let decodedData = try? JSONDecoder().decode(JSONDataModel.self, from: data)
-                DispatchQueue.main.async {
-                    if let decodedData {
-                        for item in decodedData.todos {
-                            print("Сохраняю данные в контейнер")
-                            let newItem = ToDoListEntity(context: self.container.viewContext)
-//                            newItem.id = Int64(item.id)
-//                            newItem.userID = Int64(item.userID)
-//                            newItem.todo = item.todo
-//                            newItem.completed = item.completed
-                            newItem.id = Int64(UUID().hashValue)
-                            newItem.userID = 1
-                            newItem.todo = "Новая задача"
-                            newItem.completed = false
-                        }
+            DispatchQueue.main.async {
+                if let decodedData {
+                    for item in decodedData.todos {
+                        self.createNewEntry(
+                            id: Int64(item.id),
+                            userID: Int64(item.userID),
+                            todo: item.todo,
+                            completed: item.completed)
                     }
-                    print("Всего объектов в хранилище: \(String(describing: decodedData?.todos.count))")
                 }
+            }
         }
-        // извлекаем данные из контейнера
-        fetchHelloData()
     }
 
+    func resetTheList() {
+        deleteAllData()
+        saveDownLoadedData()
+    }
 
+    func makeCompleted(entry: ToDoListEntity) {
+        entry.completed.toggle()
+        saveContainer()
+        fetchData()
+    }
 
 
 

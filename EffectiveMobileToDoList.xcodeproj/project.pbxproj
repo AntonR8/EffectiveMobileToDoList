@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02F36E312C847021002C3003 /* EntryEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F36E302C847021002C3003 /* EntryEditingView.swift */; };
+		02F36E4D2C84AF93002C3003 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F36E4C2C84AF93002C3003 /* PlusButtonView.swift */; };
 		1231A3882C81E9E400304A16 /* EffectiveMobileToDoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3872C81E9E400304A16 /* EffectiveMobileToDoListApp.swift */; };
 		1231A38A2C81E9E400304A16 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3892C81E9E400304A16 /* MainView.swift */; };
 		1231A38C2C81E9E500304A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1231A38B2C81E9E500304A16 /* Assets.xcassets */; };
@@ -17,10 +19,12 @@
 		1231A39F2C81EFDE00304A16 /* ListElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A39E2C81EFDE00304A16 /* ListElementView.swift */; };
 		1231A3A22C81F05A00304A16 /* ToDoListData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3A02C81F05A00304A16 /* ToDoListData.xcdatamodeld */; };
 		1231A3A42C81F0D500304A16 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3A32C81F0D500304A16 /* ViewModel.swift */; };
-		1231A3A62C8201B400304A16 /* ListItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3A52C8201B400304A16 /* ListItemModel.swift */; };
+		1231A3A62C8201B400304A16 /* JSONDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231A3A52C8201B400304A16 /* JSONDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02F36E302C847021002C3003 /* EntryEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryEditingView.swift; sourceTree = "<group>"; };
+		02F36E4C2C84AF93002C3003 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
 		1231A3842C81E9E400304A16 /* EffectiveMobileToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EffectiveMobileToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1231A3872C81E9E400304A16 /* EffectiveMobileToDoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectiveMobileToDoListApp.swift; sourceTree = "<group>"; };
 		1231A3892C81E9E400304A16 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -32,7 +36,7 @@
 		1231A39E2C81EFDE00304A16 /* ListElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListElementView.swift; sourceTree = "<group>"; };
 		1231A3A12C81F05A00304A16 /* ToDoListData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoListData.xcdatamodel; sourceTree = "<group>"; };
 		1231A3A32C81F0D500304A16 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		1231A3A52C8201B400304A16 /* ListItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemModel.swift; sourceTree = "<group>"; };
+		1231A3A52C8201B400304A16 /* JSONDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02F36E4E2C84AF9A002C3003 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				02F36E4C2C84AF93002C3003 /* PlusButtonView.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 		1231A37B2C81E9E400304A16 = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				1231A3872C81E9E400304A16 /* EffectiveMobileToDoListApp.swift */,
-				1231A3A52C8201B400304A16 /* ListItemModel.swift */,
+				1231A3A52C8201B400304A16 /* JSONDataModel.swift */,
 				1231A3A32C81F0D500304A16 /* ViewModel.swift */,
 				1231A3952C81EAB500304A16 /* Views */,
 				1231A3A02C81F05A00304A16 /* ToDoListData.xcdatamodeld */,
@@ -87,6 +99,7 @@
 		1231A3952C81EAB500304A16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				02F36E4E2C84AF9A002C3003 /* Elements */,
 				1231A39C2C81EC5200304A16 /* Main */,
 				1231A39D2C81EFBB00304A16 /* ListView */,
 			);
@@ -108,6 +121,7 @@
 			children = (
 				1231A3962C81EACC00304A16 /* ListView.swift */,
 				1231A39E2C81EFDE00304A16 /* ListElementView.swift */,
+				02F36E302C847021002C3003 /* EntryEditingView.swift */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
@@ -186,8 +200,10 @@
 				1231A3992C81EAFC00304A16 /* AboutView.swift in Sources */,
 				1231A38A2C81E9E400304A16 /* MainView.swift in Sources */,
 				1231A3882C81E9E400304A16 /* EffectiveMobileToDoListApp.swift in Sources */,
-				1231A3A62C8201B400304A16 /* ListItemModel.swift in Sources */,
+				02F36E312C847021002C3003 /* EntryEditingView.swift in Sources */,
+				1231A3A62C8201B400304A16 /* JSONDataModel.swift in Sources */,
 				1231A3972C81EACC00304A16 /* ListView.swift in Sources */,
+				02F36E4D2C84AF93002C3003 /* PlusButtonView.swift in Sources */,
 				1231A39F2C81EFDE00304A16 /* ListElementView.swift in Sources */,
 				1231A3A42C81F0D500304A16 /* ViewModel.swift in Sources */,
 				1231A3A22C81F05A00304A16 /* ToDoListData.xcdatamodeld in Sources */,

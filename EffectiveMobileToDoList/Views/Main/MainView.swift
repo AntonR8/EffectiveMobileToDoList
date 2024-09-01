@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var vm: ViewModel
     @State var selection = 1
     @State private var showLaunchScreen = true
     @State private var opacity: CGFloat = 1
+    
     var body: some View {
         ZStack {
             TabView(selection: $selection,
                     content:  {
                 ListView()
+                   
                     .tabItem {
                         Text("Мои задачи")
                         Image(systemName: "list.bullet.rectangle.portrait")
                     }
                     .tag(1)
+                
                 AboutView()
                     .tabItem {
                         Text("О приложении")
@@ -28,7 +32,6 @@ struct MainView: View {
                     }
                     .tag(2)
             })
-            
             LaunchScreen()
                 .opacity(opacity)
                 .onAppear{
@@ -38,10 +41,23 @@ struct MainView: View {
                         }
                     }
                 }
+            VStack {
+                Spacer()
+                PlusButtonView()
+                    .opacity(1.0-opacity)
+            }
         }
+        
+        .sheet(isPresented: $vm.createNewEntry, content: {
+            EntryEditingView(entry: nil, navigationPath: $vm.navigationPath, navigationTitle: "Новая задача", saveButtonName: "Добавить")
+                .presentationDetents([.medium])
+        })
     }
+    
+    
 }
 
 #Preview {
     MainView()
+        .environmentObject(ViewModel())
 }

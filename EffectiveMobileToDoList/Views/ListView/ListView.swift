@@ -8,33 +8,27 @@
 import SwiftUI
 
 struct ListView: View {
-   @ObservedObject var vm = ViewModel()
-    @State var addOn = false
-
+    @EnvironmentObject var vm: ViewModel
+    
+    
     var body: some View {
-        List {
-            ForEach(vm.toDoList) { item in
-                ListElementView(id: Int(item.id), todo: item.todo ?? "", completed: item.completed, userID: Int(item.userID), dateMade: item.dateMade ?? Date())
-            }
-        }
-        .onDelete(perform: { indexSet in
-            vm.deleteItem(atOffsets: indexSet)
-        })
-        .onMove(perform: {i1,i2 in
-            vm.moveItems(fromOffsets: i1, toOffset: i2)
-        })
-        .toolbar{
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button (action:{
-                    addOn.toggle()
-                }, label: {
-                    Image(systemName: "plus")
+        NavigationStack(path: $vm.navigationPath){
+            List {
+                ForEach(vm.toDoList.sorted(by: { $0.id > $1.id })) { item in
+                    ListElementView(entry: item)
+                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                            Button(item.completed ? "Не выполнено" : "Выполнено") {
+                                vm.makeCompleted(entry: item)
+                            }
+                            .tint(item.completed ? .red : .blue)
+                        }
+                }
+                .onDelete(perform: { indexSet in
+                    vm.deleteItem(atOffsets: indexSet)
                 })
-
             }
+            .listStyle(.inset)
+            .navigationTitle("Мои задачи")
         }
     }
 }

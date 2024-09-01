@@ -12,7 +12,6 @@ struct JSONDataModel: Codable {
         let total, skip, limit: Int
     }
 
-    // MARK: - Todo
     struct ListItemModel: Codable {
     let id: Int
     let todo: String
