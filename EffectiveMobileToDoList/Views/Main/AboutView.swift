@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct AboutView: View {
-    @EnvironmentObject var vm: ViewModel
+    @EnvironmentObject var presenter: Presenter
+
     let personalURL = URL(string: "https://antonr8.tilda.ws")!
     let appslURL = URL(string: "https://apps.apple.com/app/id6479015785")!
     let contactURL = URL(string: "https://t.me/AntonR87")!
+
     @State var showButton = true
 
     var body: some View {
@@ -19,7 +21,7 @@ struct AboutView: View {
                 if showButton {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 2)) {
-                        vm.resetTheList()
+                            presenter.resetTheList()
                             showButton = false
                         }
                       
@@ -71,5 +73,5 @@ struct AboutView: View {
 
 #Preview {
     AboutView()
-        .environmentObject(ViewModel())
+        .environmentObject(Presenter(interactor: Interactor()))
 }

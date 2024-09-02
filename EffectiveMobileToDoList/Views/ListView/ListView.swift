@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct ListView: View {
-    @EnvironmentObject var vm: ViewModel
-    
-    
+    @EnvironmentObject var presenter: Presenter
+        
     var body: some View {
         NavigationStack(){
             List {
-                ForEach(vm.toDoList.sorted(by: { $0.dateMade ?? Date() < $1.dateMade ?? Date() })) { item in
-                    ListElementView(entry: item)
+                ForEach(presenter.toDoList.sorted(by: { $0.dateMade ?? Date() > $1.dateMade ?? Date() })) { entry in
+                    ListElementView(entry: entry)
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                            Button(item.completed ? "Не выполнено" : "Выполнено") {
-                                vm.makeCompleted(entry: item)
+                            Button(entry.completed ? "Не выполнено" : "Выполнено") {
+                                    presenter.makeCompleted(entry: entry)
                             }
-                            .tint(item.completed ? .orange : .green)
+                            .tint(entry.completed ? .orange : .green)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button("Удалить") {
-                                vm.deleteItem(entry: item)
+                                presenter.deleteItem(entry: entry)
                             }
                             .tint(.red)
                         }
@@ -38,5 +37,5 @@ struct ListView: View {
 
 #Preview {
     ListView()
-        .environmentObject(ViewModel())
+        .environmentObject(Presenter(interactor: Interactor()))
 }

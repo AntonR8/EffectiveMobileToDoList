@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ListElementView: View {
-    @EnvironmentObject var vm: ViewModel
     let entry: ToDoListEntity
     
     var body: some View {
@@ -28,11 +27,10 @@ struct ListElementView: View {
                         .font(.footnote)
                 }.overlay {
                     NavigationLink {
-                        EntryEditingView(entry: entry, navigationPath: $vm.navigationPath, navigationTitle: "Редактировать задачу", saveButtonName: "Сохранить")
+                        EntryEditingView(entry: entry, navigationTitle: "Редактировать задачу", saveButtonName: "Сохранить")
                     } label: {EmptyView() }.opacity(0)
                 }
                 Spacer()
-                Divider()
                 VStack{
                     Text(entry.dateMade?.formatted(date: .omitted, time: .shortened) ?? Date().formatted(date: .omitted, time: .shortened))
                     Text(entry.dateMade?.formatted(date: .numeric, time: .omitted) ?? Date().formatted(date: .numeric, time: .omitted))

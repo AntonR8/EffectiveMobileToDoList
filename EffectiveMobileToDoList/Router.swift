@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+
+class Router: ObservableObject {
+    enum Route {
+        case list
+        case about
+    }
+
+    @Published var currentRoute: Route = .list
+
+}

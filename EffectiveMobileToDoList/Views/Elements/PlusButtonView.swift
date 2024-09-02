@@ -8,28 +8,28 @@
 import SwiftUI
 
 struct PlusButtonView: View {
-    @EnvironmentObject var vm: ViewModel
-  
+    @EnvironmentObject var presenter: Presenter
+
     var body: some View {
-        Button (action:{
-            withAnimation(.easeInOut) {
-                vm.createNewEntry = true
-            }
-        }, label: {
-            Image(systemName: "plus")
-                .foregroundColor(.white)
-                .font(.title)
-                .bold()
-                .padding()
-                .background(
-                    Circle()
-                        .fill(.accent.gradient)
-                )
-        })
+            Button (action: {
+                withAnimation(.easeInOut) {
+                    presenter.createNewEntry = true
+                }
+            }, label: {
+                Image(systemName: "plus")
+                    .foregroundColor(.white)
+                    .font(.title)
+                    .bold()
+                    .padding()
+                    .background(
+                        Circle()
+                            .fill(.accent.gradient)
+                    )
+            })
     }
 }
 
 #Preview {
     PlusButtonView()
-        .environmentObject(ViewModel())
+        .environmentObject(Presenter(interactor: Interactor()))
 }

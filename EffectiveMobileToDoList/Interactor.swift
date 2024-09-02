@@ -10,7 +10,6 @@ import CoreData
 
 class Interactor {
 
-//    toDoList = fetchData
     func fetchData(container: NSPersistentContainer) -> [ToDoListEntity]{
         let request = NSFetchRequest<ToDoListEntity>(entityName: "ToDoListEntity")
         do {
@@ -29,7 +28,7 @@ class Interactor {
         }
     }
 
-    func createNewEntry(container: NSPersistentContainer, id: Int64 = Int64(UUID().hashValue), userID: Int64 = 1, todo: String, completed: Bool = false, date: Date = Date()) {
+    func saveEntry(container: NSPersistentContainer, id: Int64 = Int64(UUID().hashValue), userID: Int64 = 1, todo: String, completed: Bool = false, date: Date = Date()) {
         // создаём экземпляр данных:
         let newItem = ToDoListEntity(context: container.viewContext)
         newItem.id = id
@@ -39,26 +38,9 @@ class Interactor {
         newItem.dateMade = date
 
         saveContainer(container: container)
-//        fetchData(container: container)
     }
 
-    func resaveEntry(container: NSPersistentContainer, entry: ToDoListEntity, todo: String) {
-        container.viewContext.delete(entry)
-        createNewEntry(
-            container: container, 
-            id: entry.id,
-            userID: entry.userID,
-            todo: todo,
-            completed: entry.completed,
-            date: entry.dateMade ?? Date()
-        )
-    }
 
-    func deleteItem(container: NSPersistentContainer, entry: ToDoListEntity) {
-        container.viewContext.delete(entry)
-        saveContainer(container: container)
-//        fetchData(container: container)
-    }
 
     func downLoadJSONData(url: URL, completionHandler: @escaping(Data) -> ()) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -85,7 +67,7 @@ class Interactor {
             DispatchQueue.main.async {
                 if let decodedData {
                     for item in decodedData.todos {
-                        self.createNewEntry(
+                        self.saveEntry(
                             container: container, 
                             id: Int64(item.id),
                             userID: Int64(item.userID),
@@ -97,17 +79,9 @@ class Interactor {
         }
     }
 
-    func resetTheList() {
-//        toDoList.removeAll()
-//        saveContainer()
-//        saveDownLoadedData()
-    }
 
-    func makeCompleted(entry: ToDoListEntity) {
-//        entry.completed.toggle()
-//        saveContainer()
-//        fetchData()
-    }
+
+
 
 
 

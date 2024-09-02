@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct EffectiveMobileToDoListApp: App {
-    @EnvironmentObject var vm: ViewModel
+    @EnvironmentObject var presenter: Presenter
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(ViewModel())
+                .environmentObject(Presenter(interactor: Interactor()))
         }
     }
 }
