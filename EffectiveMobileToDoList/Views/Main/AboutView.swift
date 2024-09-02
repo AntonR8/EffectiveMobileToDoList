@@ -29,7 +29,7 @@ struct AboutView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .foregroundStyle(.primary)
-                    .background(Color.red)
+                    .background(Color.accentColor)
                     .clipShape(
                         RoundedRectangle(cornerRadius: 15.0)
                     )

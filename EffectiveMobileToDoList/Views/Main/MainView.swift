@@ -18,7 +18,6 @@ struct MainView: View {
             TabView(selection: $selection,
                     content:  {
                 ListView()
-                   
                     .tabItem {
                         Text("Мои задачи")
                         Image(systemName: "list.bullet.rectangle.portrait")

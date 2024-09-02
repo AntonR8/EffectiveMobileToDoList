@@ -12,20 +12,23 @@ struct ListView: View {
     
     
     var body: some View {
-        NavigationStack(path: $vm.navigationPath){
+        NavigationStack(){
             List {
-                ForEach(vm.toDoList.sorted(by: { $0.id > $1.id })) { item in
+                ForEach(vm.toDoList.sorted(by: { $0.dateMade ?? Date() < $1.dateMade ?? Date() })) { item in
                     ListElementView(entry: item)
-                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
                             Button(item.completed ? "Не выполнено" : "Выполнено") {
                                 vm.makeCompleted(entry: item)
                             }
-                            .tint(item.completed ? .red : .blue)
+                            .tint(item.completed ? .orange : .green)
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button("Удалить") {
+                                vm.deleteItem(entry: item)
+                            }
+                            .tint(.red)
                         }
                 }
-                .onDelete(perform: { indexSet in
-                    vm.deleteItem(atOffsets: indexSet)
-                })
             }
             .listStyle(.inset)
             .navigationTitle("Мои задачи")

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EntryEditingView: View {
     @EnvironmentObject var vm: ViewModel
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     let entry: ToDoListEntity?
     @Binding var navigationPath: NavigationPath
     
@@ -42,7 +43,7 @@ struct EntryEditingView: View {
                         } else {
                             vm.createNewEntry(todo: textFieldtext)
                         }
-                        navigationPath.removeLast(navigationPath.count)
+                        presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text(saveButtonName)
                             .font(.headline)

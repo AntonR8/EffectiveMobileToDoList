@@ -1,44 +1,27 @@
 //
-//  ViewModel.swift
+//  Interactor.swift
 //  EffectiveMobileToDoList
 //
-//  Created by Антон Разгуляев on 30.08.2024.
+//  Created by Антон Разгуляев on 02.09.2024.
 //
 
-import SwiftUI
+import Foundation
 import CoreData
 
-class ViewModel: ObservableObject {
-    @Published var createNewEntry = false
-    @Published var navigationPath = NavigationPath()
-    @AppStorage("firstLaunch") var firstLaunch = true
-    @Published var toDoList: [ToDoListEntity] = []
-    let container: NSPersistentContainer
+class Interactor {
 
-    init() {
-        container = NSPersistentContainer(name: "ToDoListData")
-        container.loadPersistentStores { _, error in
-            if let error = error {
-                print ("Ошибка загрузки данных: \(error)")
-            }
-        }
-        fetchData()
-        if firstLaunch {
-            saveDownLoadedData()
-        }
-        firstLaunch = false
-    }
-
-    func fetchData() {
+//    toDoList = fetchData
+    func fetchData(container: NSPersistentContainer) -> [ToDoListEntity]{
         let request = NSFetchRequest<ToDoListEntity>(entityName: "ToDoListEntity")
         do {
-            toDoList = try container.viewContext.fetch(request)
+            return try container.viewContext.fetch(request)
         } catch let error {
             print ("Ошибка извлечения данных: \(error)")
+            return []
         }
     }
-    
-    func saveContainer() {
+
+    func saveContainer(container: NSPersistentContainer) {
         do {
             try container.viewContext.save()
         } catch let error {
@@ -46,7 +29,7 @@ class ViewModel: ObservableObject {
         }
     }
 
-    func createNewEntry(id: Int64 = Int64(UUID().hashValue), userID: Int64 = 1, todo: String, completed: Bool = false, date: Date = Date()) {
+    func createNewEntry(container: NSPersistentContainer, id: Int64 = Int64(UUID().hashValue), userID: Int64 = 1, todo: String, completed: Bool = false, date: Date = Date()) {
         // создаём экземпляр данных:
         let newItem = ToDoListEntity(context: container.viewContext)
         newItem.id = id
@@ -54,14 +37,15 @@ class ViewModel: ObservableObject {
         newItem.todo = todo
         newItem.completed = completed
         newItem.dateMade = date
-      
-        saveContainer()
-        fetchData()
+
+        saveContainer(container: container)
+//        fetchData(container: container)
     }
-    
-    func resaveEntry(entry: ToDoListEntity, todo: String) {
+
+    func resaveEntry(container: NSPersistentContainer, entry: ToDoListEntity, todo: String) {
         container.viewContext.delete(entry)
         createNewEntry(
+            container: container, 
             id: entry.id,
             userID: entry.userID,
             todo: todo,
@@ -70,11 +54,10 @@ class ViewModel: ObservableObject {
         )
     }
 
-
-    func deleteItem(entry: ToDoListEntity) {
+    func deleteItem(container: NSPersistentContainer, entry: ToDoListEntity) {
         container.viewContext.delete(entry)
-        saveContainer()
-        fetchData()
+        saveContainer(container: container)
+//        fetchData(container: container)
     }
 
     func downLoadJSONData(url: URL, completionHandler: @escaping(Data) -> ()) {
@@ -92,9 +75,7 @@ class ViewModel: ObservableObject {
         }.resume()
     }
 
-    
-    
-    func saveDownLoadedData() {
+    func saveDownLoadedData(container: NSPersistentContainer) {
         guard let url = URL(string: "https://dummyjson.com/todos") else {
             print("Переданная ссылка не корректна")
             return
@@ -105,6 +86,7 @@ class ViewModel: ObservableObject {
                 if let decodedData {
                     for item in decodedData.todos {
                         self.createNewEntry(
+                            container: container, 
                             id: Int64(item.id),
                             userID: Int64(item.userID),
                             todo: item.todo,
@@ -116,15 +98,15 @@ class ViewModel: ObservableObject {
     }
 
     func resetTheList() {
-        toDoList.removeAll()
-        saveContainer()
-        saveDownLoadedData()
+//        toDoList.removeAll()
+//        saveContainer()
+//        saveDownLoadedData()
     }
 
     func makeCompleted(entry: ToDoListEntity) {
-        entry.completed.toggle()
-        saveContainer()
-        fetchData()
+//        entry.completed.toggle()
+//        saveContainer()
+//        fetchData()
     }
 
 
