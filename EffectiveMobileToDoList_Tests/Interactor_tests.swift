@@ -19,7 +19,13 @@ final class Interactor_tests: XCTestCase {
     }
 
     func test_Interactor_downLoadJSONData_should() {
+        // дано:
 
+        // при условии:
+
+// должно выполняться:
+
+        XCTAssertNoThrow(<#T##expression: T##T#>)
     }
 
 }

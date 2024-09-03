@@ -104,10 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				1231A3872C81E9E400304A16 /* EffectiveMobileToDoListApp.swift */,
-				12440A912C85A85D00588A9A /* Entities */,
 				1231A3952C81EAB500304A16 /* Views */,
 				12440A8B2C85A7B300588A9A /* Interactor.swift */,
 				12440A8D2C85A7C500588A9A /* Presenter.swift */,
+				12440A912C85A85D00588A9A /* Entities */,
 				12440A8F2C85A80B00588A9A /* Router.swift */,
 				1231A38B2C81E9E500304A16 /* Assets.xcassets */,
 				1231A38D2C81E9E500304A16 /* Preview Content */,

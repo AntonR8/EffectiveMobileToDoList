@@ -45,6 +45,7 @@ struct MainView: View {
                 if !presenter.isTyping {
                     PlusButtonView()
                         .opacity(1.0-opacity)
+                        .transition(.opacity)
                 }
             }
         }
@@ -53,6 +54,9 @@ struct MainView: View {
         .sheet(isPresented: $presenter.createNewEntry, content: {
             EntryEditingView(entry: nil, navigationTitle: "Новая задача", saveButtonName: "Добавить")
                 .presentationDetents([.medium])
+                .onDisappear{
+                    presenter.isTyping = false
+                }
         })
     }
     

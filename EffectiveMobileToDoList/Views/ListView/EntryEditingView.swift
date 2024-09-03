@@ -49,6 +49,7 @@ struct EntryEditingView: View {
                                 presenter.createNewEntry(todo: textFieldtext)
                             }
                             presentationMode.wrappedValue.dismiss()
+                            presenter.isTyping = false
                         }, label: {
                             Text(saveButtonName)
                                 .font(.headline)

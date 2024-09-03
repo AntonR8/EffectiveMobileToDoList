@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ListElementView: View {
+    @EnvironmentObject var presenter: Presenter
     let entry: ToDoListEntity
     
     var body: some View {
@@ -28,6 +29,9 @@ struct ListElementView: View {
                 }.overlay {
                     NavigationLink {
                         EntryEditingView(entry: entry, navigationTitle: "Редактировать задачу", saveButtonName: "Сохранить")
+                            .onDisappear{
+                                presenter.isTyping = false
+                            }
                     } label: {EmptyView() }.opacity(0)
                 }
                 Spacer()
