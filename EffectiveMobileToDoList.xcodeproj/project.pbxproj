@@ -22,7 +22,6 @@
 		12440A8C2C85A7B300588A9A /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12440A8B2C85A7B300588A9A /* Interactor.swift */; };
 		12440A8E2C85A7C500588A9A /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12440A8D2C85A7C500588A9A /* Presenter.swift */; };
 		12440A902C85A80B00588A9A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12440A8F2C85A80B00588A9A /* Router.swift */; };
-		12ACAB1F2C86E7FD0081182F /* Interactor_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACAB1E2C86E7FD0081182F /* Interactor_tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +52,6 @@
 		12440A8D2C85A7C500588A9A /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		12440A8F2C85A80B00588A9A /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		12ACAB152C86E77D0081182F /* EffectiveMobileToDoList_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EffectiveMobileToDoList_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		12ACAB1E2C86E7FD0081182F /* Interactor_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor_tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				1231A3862C81E9E400304A16 /* EffectiveMobileToDoList */,
-				12ACAB162C86E77D0081182F /* EffectiveMobileToDoList_Tests */,
 				1231A3852C81E9E400304A16 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -160,14 +157,6 @@
 				1231A3A02C81F05A00304A16 /* ToDoListData.xcdatamodeld */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		12ACAB162C86E77D0081182F /* EffectiveMobileToDoList_Tests */ = {
-			isa = PBXGroup;
-			children = (
-				12ACAB1E2C86E7FD0081182F /* Interactor_tests.swift */,
-			);
-			path = EffectiveMobileToDoList_Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,7 +279,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12ACAB1F2C86E7FD0081182F /* Interactor_tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
