@@ -18,7 +18,7 @@ class Presenter: ObservableObject {
     @AppStorage("firstLaunch") var firstLaunch = true
     @Published var toDoList: [ToDoListEntity] = []
 
-    let container: NSPersistentContainer
+    var container: NSPersistentContainer
 
     init(interactor: Interactor) {
         self.interactor = interactor
@@ -29,41 +29,60 @@ class Presenter: ObservableObject {
                 print ("Ошибка загрузки данных: \(error)")
             }
         }
-        toDoList = interactor.fetchData(container: container)
-        if firstLaunch {
-            interactor.saveDownLoadedData(container: container)
+
+        if self.firstLaunch {
+            interactor.saveDownLoadedData(container: container, link: "https://dummyjson.com/todos") { fetchedData in
+                DispatchQueue.main.async {
+                    self.toDoList = fetchedData
+                }
+            }
+            self.firstLaunch = false
+        } else {
+            self.toDoList = interactor.fetchData(container: self.container)
         }
-        firstLaunch = false
+
     }
 
-    func resetTheList() {
-        toDoList.removeAll()
-        interactor.saveContainer(container: container)
-        interactor.saveDownLoadedData(container: container)
-        toDoList = interactor.fetchData(container: container)
-    }
-
+    /// Функция изменения свойства completed. Изменяет значение на противоположное. Все задачи выполняются в фоновом потоке, задача, свящанная с измением toDoList, который отображается на View, выполняется в главном. В данной функции)не возникает цикла сильных ссылок, поэтому применение слобых ссылок [weak self] не требуется.
     func makeCompleted(entry: ToDoListEntity) {
-        container.viewContext.delete(entry)
-        interactor.saveEntry(container: container, todo: entry.todo ?? "", completed: !entry.completed, date: entry.dateMade ?? Date())
-        toDoList = interactor.fetchData(container: container)
+        DispatchQueue.global().async { [self] in
+            self.container.viewContext.delete(entry)
+            interactor.saveEntry(container: container, todo: entry.todo ?? "", completed: !entry.completed, date: entry.dateMade ?? Date())
+            DispatchQueue.main.async {
+                self.toDoList = self.interactor.fetchData(container: self.container)
+            }
+        }
     }
 
+    /// Функция удаления передаваемой записи. Все задачи выполняются в фоновом потоке, задача, свящанная с измением toDoList, который отображается на View, выполняется в главном. В данной функции)не возникает цикла сильных ссылок, поэтому применение слобых ссылок [weak self] не требуется.
     func deleteItem(entry: ToDoListEntity) {
-        container.viewContext.delete(entry)
-        interactor.saveContainer(container: container)
-        toDoList = interactor.fetchData(container: container)
+        DispatchQueue.global().async {
+            self.container.viewContext.delete(entry)
+            self.interactor.saveContainer(container: self.container)
+            DispatchQueue.main.async {
+                self.toDoList = self.interactor.fetchData(container: self.container)
+            }
+        }
     }
 
+    /// Функция создания новой записи. Все задачи выполняются в фоновом потоке, задача, свящанная с измением toDoList, который отображается на View, выполняется в главном. В данной функции)не возникает цикла сильных ссылок, поэтому применение слобых ссылок [weak self] не требуется.
     func createNewEntry(todo: String) {
-        interactor.saveEntry(container: container, todo: todo)
-        toDoList = interactor.fetchData(container: container)
+        DispatchQueue.global().async {
+            self.interactor.saveEntry(container: self.container, todo: todo)
+            DispatchQueue.main.async {
+                self.toDoList = self.interactor.fetchData(container: self.container)
+            }
+        }
     }
 
+    /// Функция сохранения измененной записи. Все задачи выполняются в фоновом потоке, задача, свящанная с измением toDoList, который отображается на View, выполняется в главном. В данной функции)не возникает цикла сильных ссылок, поэтому применение слобых ссылок [weak self] не требуется.
     func resaveEntry(entry: ToDoListEntity, todo: String) {
-        container.viewContext.delete(entry)
-        interactor.saveEntry(container: container, id: entry.id, userID: entry.userID, todo: todo, completed: entry.completed, date: entry.dateMade ?? Date())
-        toDoList = interactor.fetchData(container: container)
+        DispatchQueue.global().async {
+            self.container.viewContext.delete(entry)
+            self.interactor.saveEntry(container: self.container, id: entry.id, userID: entry.userID, todo: todo, completed: entry.completed, date: entry.dateMade ?? Date())
+            DispatchQueue.main.async {
+                self.toDoList = self.interactor.fetchData(container: self.container)
+            }
+        }
     }
-
 }

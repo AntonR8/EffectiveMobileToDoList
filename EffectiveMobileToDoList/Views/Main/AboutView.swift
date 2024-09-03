@@ -18,25 +18,6 @@ struct AboutView: View {
 
     var body: some View {
         NavigationStack {
-                if showButton {
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 2)) {
-                            presenter.resetTheList()
-                            showButton = false
-                        }
-                      
-                    }, label: {
-                        Text("Восстановить исходный список")
-                    })
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .foregroundStyle(.primary)
-                    .background(Color.accentColor)
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 15.0)
-                    )
-                    .padding()
-                }
             List {
                 Section (header: Text("Информация о разработчике")) {
                     VStack(alignment: .leading) {
